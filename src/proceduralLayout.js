@@ -1,3 +1,4 @@
+import {layoutSideStone,sideStoneRotation} from './layoutStones.js';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {settingPlan,createSetting,stoneOutline} from './proceduralSetting.js';
@@ -35,7 +36,7 @@ export function createLayout({config,plan,footprint}){
  const angle=Number(config.orientationDeg??0)*Math.PI/180;
  function halo(offset,height){
   const path=offsetContour(plan.outline,plan.width,plan.length,offset).map(([px,py])=>[px*Math.cos(angle)-py*Math.sin(angle),px*Math.sin(angle)+py*Math.cos(angle)]);
-  const distances=path.map((p,i)=>Math.hypot(p[0]-path[(i+1)%path.length][0],p[1]-path[(i+1)%path.length][1])),length=distances.reduce((a,b)=>a+b,0),count=Math.max(8,Math.floor(length/1.12));
+  const distances=path.map((p,i)=>Math.hypot(p[0]-path[(i+1)%path.length][0],p[1]-path[(i+1)%path.length][1])),length=distances.reduce((a,b)=>a+b,0),count=Math.max(8,Math.floor(length/1.00));
   loop(path.map(([x,y])=>[x,height-.5,-y]),.15);
   const placed=[];
   for(let k=0;k<count;k++){
@@ -59,10 +60,10 @@ export function createLayout({config,plan,footprint}){
  }
  if(['Halo','Double halo'].includes(config.layout)){halo(.85,plan.girdle-.25);if(config.layout==='Double halo')halo(1.9,plan.girdle-.32);}
  if(config.layout==='Hidden halo')halo(config.stone.shape==='Heart'?.65:-.25,plan.bottom+.6);
- if(['Three-stone','Five-stone','Graduated'].includes(config.layout))for(const sign of [-1,1])for(const [index,angle] of footprint.sideAngles.entries()){
-  const width=index===0?2.7:config.layout==='Graduated'?1.65:1.9,stone={shape:'Round',widthMm:width,lengthMm:width,depthMm:width*.60};
+ if(['Three-stone','Five-stone','Graduated'].includes(config.layout))for(const sign of [-1,1])for(const [index,angle] of (footprint.sideAnglesBySign?.[sign]??footprint.sideAngles).entries()){
+  const stone=layoutSideStone(config,index);
   const side=settingPlan(stone,'4 prong',config.thicknessMm,r,0),satellite=new THREE.Group();satellite.position.set(r*Math.sin(sign*angle),r*Math.cos(angle),0);satellite.rotation.z=-sign*angle;
-  const head=createSetting(side);head.position.y=-r;satellite.add(head);const gem=createStone(stone,side.girdle);gem.position.y=-r;satellite.add(gem);group.add(satellite);
+  const head=createSetting(side);head.rotation.y=sideStoneRotation(stone.shape,sign);head.position.y=-r;satellite.add(head);const gem=createStone(stone,side.girdle);gem.rotation.y=sideStoneRotation(stone.shape,sign);gem.position.y=-r;gem.userData.sideStone={...stone,index,sign};satellite.add(gem);group.add(satellite);
  }
  // Merge only visual metal; this is not a CAD boolean union.
  group.updateMatrixWorld(true);const meshes=[];group.traverse(o=>{if(o.isMesh&&o.material.name==='Metal')meshes.push(o);});

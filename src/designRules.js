@@ -1,3 +1,6 @@
+import {sidePlacements} from './settingSpacing.js';
+import {sideStoneShapes,layoutSideStone,sideStoneSpan} from './layoutStones.js';
+import {gemValidation} from './gemstones.js';
 import {ringDimensions} from './sizing.js';
 import {bandStyles,accentStyles,layoutStyles,accentCompatibleBands,settingCompatibleBands,supportedAccents} from './options.js';
 import {stoneOutline} from './proceduralSetting.js';
@@ -7,7 +10,7 @@ export function layoutFootprint(config){
  const {centerRadiusMm:r}=ringDimensions(config),stone=config.stone;
  const rotated=Number(config.orientationDeg)===90,width=rotated?stone.lengthMm:stone.widthMm;
  const layout=config.layout??'Solitaire';let reserve=Math.asin(Math.min(.95,(width/2+.4)/r))+.06;
- let sideAngles=[],haloSpan=0;
+ let sideAngles=[],sideAnglesBySign={},haloSpan=0;
  if(['Halo','Double halo','Hidden halo'].includes(layout)){
   const offset={Halo:.85,'Double halo':1.9,'Hidden halo':stone.shape==='Heart'?.65:-.25}[layout];
   const contour=offsetContour(stoneOutline(stone.shape),stone.widthMm,stone.lengthMm,offset);
@@ -15,19 +18,21 @@ export function layoutFootprint(config){
   reserve=Math.asin(Math.min(.98,haloSpan/r))+.16;
  }
  if(['Three-stone','Five-stone','Graduated'].includes(layout)){
-  const ratio=(width/2+.45+1.35+.45)/r;
-  const first=Math.asin(Math.min(.999,ratio));sideAngles=[first];
-  if(layout!=='Three-stone')sideAngles.push(first+2.65/(r+2.2));
-  reserve=sideAngles.at(-1)+.16;
+  sideAnglesBySign=sidePlacements(config);
+  sideAngles=sideAnglesBySign[1];
+  const last=Math.max(...Object.values(sideAnglesBySign).map(angles=>angles.at(-1)));
+  const outer=layoutSideStone(config,sideAngles.length-1);
+  reserve=last+Math.max(.16,sideStoneSpan(outer)/2/(r+2.2));
  }
  const zone=reserve<=.4?'standard':reserve<=.7?'head':reserve<=.9?'wide':'multi';
- return {reserveAngle:reserve,zone,sideAngles,haloSpan,shoulderAvailable:reserve<=1.1,layoutFits:haloSpan<r*.9&&(!sideAngles.length||sideAngles.at(-1)<1.25)};
+ return {reserveAngle:reserve,zone,sideAngles,sideAnglesBySign,haloSpan,shoulderAvailable:reserve<=1.1,layoutFits:haloSpan<r*.9&&(!sideAngles.length||Object.values(sideAnglesBySign).every(angles=>angles.at(-1)<1.25))};
 }
 export function validateDesign(c){
- const errors=[];
+ const errors=gemValidation(c);
  if(c.ringSystem&&!['US','Circumference'].includes(c.ringSystem))errors.push('Unknown ring size system.');
  if(c.band&&!bandStyles.includes(c.band))errors.push('Unknown band profile.');
  if(c.accents&&!accentStyles.includes(c.accents))errors.push('Unknown accent style.');
+ if(c.sideStoneShape!=null&&!sideStoneShapes.includes(c.sideStoneShape))errors.push('Unknown side stone shape.');
  if(c.layout&&!layoutStyles.includes(c.layout))errors.push('Unknown layout.');
  if(c.setting&&!['4 prong','6 prong','Bezel'].includes(c.setting))errors.push('Unknown center holder.');
  if(![0,90].includes(Number(c.orientationDeg??0)))errors.push('Choose north/south or east/west orientation.');
