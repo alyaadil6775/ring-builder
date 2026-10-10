@@ -1,0 +1,26 @@
+{
+  "units": "millimeters",
+  "bandInnerDiameter": 17,
+  "stoneGirdleHeight": 12.8,
+  "files": [
+    "band-plain.glb",
+    "band-split-shank.glb",
+    "band-tapered.glb",
+    "demo-emerald-4-prong.glb",
+    "demo-emerald-6-prong.glb",
+    "demo-emerald-bezel.glb",
+    "demo-emerald-stone.glb",
+    "demo-oval-4-prong.glb",
+    "demo-oval-6-prong.glb",
+    "demo-oval-bezel.glb",
+    "demo-oval-stone.glb",
+    "demo-round-1-4-prong.glb",
+    "demo-round-1-6-prong.glb",
+    "demo-round-1-bezel.glb",
+    "demo-round-1-stone.glb",
+    "demo-round-2-4-prong.glb",
+    "demo-round-2-6-prong.glb",
+    "demo-round-2-bezel.glb",
+    "demo-round-2-stone.glb"
+  ]
+}

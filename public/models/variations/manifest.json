@@ -1,0 +1,434 @@
+[
+  {
+    "id": "settings-four-prong",
+    "category": "settings",
+    "name": "Four prong",
+    "model": "settings-four-prong.glb",
+    "render": "settings-four-prong.png",
+    "project": "settings-four-prong.blend"
+  },
+  {
+    "id": "settings-six-prong",
+    "category": "settings",
+    "name": "Six prong",
+    "model": "settings-six-prong.glb",
+    "render": "settings-six-prong.png",
+    "project": "settings-six-prong.blend"
+  },
+  {
+    "id": "settings-eight-prong",
+    "category": "settings",
+    "name": "Eight prong",
+    "model": "settings-eight-prong.glb",
+    "render": "settings-eight-prong.png",
+    "project": "settings-eight-prong.blend"
+  },
+  {
+    "id": "settings-claw-prong",
+    "category": "settings",
+    "name": "Claw prong",
+    "model": "settings-claw-prong.glb",
+    "render": "settings-claw-prong.png",
+    "project": "settings-claw-prong.blend"
+  },
+  {
+    "id": "settings-double-claw",
+    "category": "settings",
+    "name": "Double claw",
+    "model": "settings-double-claw.glb",
+    "render": "settings-double-claw.png",
+    "project": "settings-double-claw.blend"
+  },
+  {
+    "id": "settings-rounded-prong",
+    "category": "settings",
+    "name": "Rounded prong",
+    "model": "settings-rounded-prong.glb",
+    "render": "settings-rounded-prong.png",
+    "project": "settings-rounded-prong.blend"
+  },
+  {
+    "id": "settings-v-prong",
+    "category": "settings",
+    "name": "V-prong",
+    "model": "settings-v-prong.glb",
+    "render": "settings-v-prong.png",
+    "project": "settings-v-prong.blend"
+  },
+  {
+    "id": "settings-full-bezel",
+    "category": "settings",
+    "name": "Full bezel",
+    "model": "settings-full-bezel.glb",
+    "render": "settings-full-bezel.png",
+    "project": "settings-full-bezel.blend"
+  },
+  {
+    "id": "settings-partial-bezel",
+    "category": "settings",
+    "name": "Partial bezel",
+    "model": "settings-partial-bezel.glb",
+    "render": "settings-partial-bezel.png",
+    "project": "settings-partial-bezel.blend"
+  },
+  {
+    "id": "settings-basket",
+    "category": "settings",
+    "name": "Basket",
+    "model": "settings-basket.glb",
+    "render": "settings-basket.png",
+    "project": "settings-basket.blend"
+  },
+  {
+    "id": "settings-cathedral",
+    "category": "settings",
+    "name": "Cathedral",
+    "model": "settings-cathedral.glb",
+    "render": "settings-cathedral.png",
+    "project": "settings-cathedral.blend"
+  },
+  {
+    "id": "settings-peg-head",
+    "category": "settings",
+    "name": "Peg head",
+    "model": "settings-peg-head.glb",
+    "render": "settings-peg-head.png",
+    "project": "settings-peg-head.blend"
+  },
+  {
+    "id": "settings-trellis",
+    "category": "settings",
+    "name": "Trellis",
+    "model": "settings-trellis.glb",
+    "render": "settings-trellis.png",
+    "project": "settings-trellis.blend"
+  },
+  {
+    "id": "settings-tension-style",
+    "category": "settings",
+    "name": "Tension-style",
+    "model": "settings-tension-style.glb",
+    "render": "settings-tension-style.png",
+    "project": "settings-tension-style.blend"
+  },
+  {
+    "id": "settings-flush",
+    "category": "settings",
+    "name": "Flush",
+    "model": "settings-flush.glb",
+    "render": "settings-flush.png",
+    "project": "settings-flush.blend"
+  },
+  {
+    "id": "layouts-solitaire",
+    "category": "layouts",
+    "name": "Solitaire",
+    "model": "layouts-solitaire.glb",
+    "render": "layouts-solitaire.png",
+    "project": "layouts-solitaire.blend"
+  },
+  {
+    "id": "layouts-three-stone",
+    "category": "layouts",
+    "name": "Three-stone",
+    "model": "layouts-three-stone.glb",
+    "render": "layouts-three-stone.png",
+    "project": "layouts-three-stone.blend"
+  },
+  {
+    "id": "layouts-five-stone",
+    "category": "layouts",
+    "name": "Five-stone",
+    "model": "layouts-five-stone.glb",
+    "render": "layouts-five-stone.png",
+    "project": "layouts-five-stone.blend"
+  },
+  {
+    "id": "layouts-halo",
+    "category": "layouts",
+    "name": "Halo",
+    "model": "layouts-halo.glb",
+    "render": "layouts-halo.png",
+    "project": "layouts-halo.blend"
+  },
+  {
+    "id": "layouts-double-halo",
+    "category": "layouts",
+    "name": "Double halo",
+    "model": "layouts-double-halo.glb",
+    "render": "layouts-double-halo.png",
+    "project": "layouts-double-halo.blend"
+  },
+  {
+    "id": "layouts-hidden-halo",
+    "category": "layouts",
+    "name": "Hidden halo",
+    "model": "layouts-hidden-halo.glb",
+    "render": "layouts-hidden-halo.png",
+    "project": "layouts-hidden-halo.blend"
+  },
+  {
+    "id": "layouts-cluster",
+    "category": "layouts",
+    "name": "Cluster",
+    "model": "layouts-cluster.glb",
+    "render": "layouts-cluster.png",
+    "project": "layouts-cluster.blend"
+  },
+  {
+    "id": "layouts-toi-et-moi",
+    "category": "layouts",
+    "name": "Toi et moi",
+    "model": "layouts-toi-et-moi.glb",
+    "render": "layouts-toi-et-moi.png",
+    "project": "layouts-toi-et-moi.blend"
+  },
+  {
+    "id": "layouts-side-stone",
+    "category": "layouts",
+    "name": "Side-stone",
+    "model": "layouts-side-stone.glb",
+    "render": "layouts-side-stone.png",
+    "project": "layouts-side-stone.blend"
+  },
+  {
+    "id": "layouts-graduated",
+    "category": "layouts",
+    "name": "Graduated",
+    "model": "layouts-graduated.glb",
+    "render": "layouts-graduated.png",
+    "project": "layouts-graduated.blend"
+  },
+  {
+    "id": "layouts-half-eternity",
+    "category": "layouts",
+    "name": "Half eternity",
+    "model": "layouts-half-eternity.glb",
+    "render": "layouts-half-eternity.png",
+    "project": "layouts-half-eternity.blend"
+  },
+  {
+    "id": "layouts-three-quarter-eternity",
+    "category": "layouts",
+    "name": "Three-quarter eternity",
+    "model": "layouts-three-quarter-eternity.glb",
+    "render": "layouts-three-quarter-eternity.png",
+    "project": "layouts-three-quarter-eternity.blend"
+  },
+  {
+    "id": "layouts-full-eternity",
+    "category": "layouts",
+    "name": "Full eternity",
+    "model": "layouts-full-eternity.glb",
+    "render": "layouts-full-eternity.png",
+    "project": "layouts-full-eternity.blend"
+  },
+  {
+    "id": "layouts-east-west",
+    "category": "layouts",
+    "name": "East-west",
+    "model": "layouts-east-west.glb",
+    "render": "layouts-east-west.png",
+    "project": "layouts-east-west.blend"
+  },
+  {
+    "id": "layouts-north-south",
+    "category": "layouts",
+    "name": "North-south",
+    "model": "layouts-north-south.glb",
+    "render": "layouts-north-south.png",
+    "project": "layouts-north-south.blend"
+  },
+  {
+    "id": "layouts-bypass",
+    "category": "layouts",
+    "name": "Bypass",
+    "model": "layouts-bypass.glb",
+    "render": "layouts-bypass.png",
+    "project": "layouts-bypass.blend"
+  },
+  {
+    "id": "layouts-asymmetric",
+    "category": "layouts",
+    "name": "Asymmetric",
+    "model": "layouts-asymmetric.glb",
+    "render": "layouts-asymmetric.png",
+    "project": "layouts-asymmetric.blend"
+  },
+  {
+    "id": "accents-pave",
+    "category": "accents",
+    "name": "Pave",
+    "model": "accents-pave.glb",
+    "render": "accents-pave.png",
+    "project": "accents-pave.blend"
+  },
+  {
+    "id": "accents-micro-pave",
+    "category": "accents",
+    "name": "Micro-pave",
+    "model": "accents-micro-pave.glb",
+    "render": "accents-micro-pave.png",
+    "project": "accents-micro-pave.blend"
+  },
+  {
+    "id": "accents-shared-prong",
+    "category": "accents",
+    "name": "Shared prong",
+    "model": "accents-shared-prong.glb",
+    "render": "accents-shared-prong.png",
+    "project": "accents-shared-prong.blend"
+  },
+  {
+    "id": "accents-channel",
+    "category": "accents",
+    "name": "Channel",
+    "model": "accents-channel.glb",
+    "render": "accents-channel.png",
+    "project": "accents-channel.blend"
+  },
+  {
+    "id": "accents-bar",
+    "category": "accents",
+    "name": "Bar",
+    "model": "accents-bar.glb",
+    "render": "accents-bar.png",
+    "project": "accents-bar.blend"
+  },
+  {
+    "id": "accents-bezel-accents",
+    "category": "accents",
+    "name": "Bezel accents",
+    "model": "accents-bezel-accents.glb",
+    "render": "accents-bezel-accents.png",
+    "project": "accents-bezel-accents.blend"
+  },
+  {
+    "id": "accents-flush-accents",
+    "category": "accents",
+    "name": "Flush accents",
+    "model": "accents-flush-accents.glb",
+    "render": "accents-flush-accents.png",
+    "project": "accents-flush-accents.blend"
+  },
+  {
+    "id": "accents-scalloped-u-cut",
+    "category": "accents",
+    "name": "Scalloped U-cut",
+    "model": "accents-scalloped-u-cut.glb",
+    "render": "accents-scalloped-u-cut.png",
+    "project": "accents-scalloped-u-cut.blend"
+  },
+  {
+    "id": "bands-rounded",
+    "category": "bands",
+    "name": "Rounded",
+    "model": "bands-rounded.glb",
+    "render": "bands-rounded.png",
+    "project": "bands-rounded.blend"
+  },
+  {
+    "id": "bands-flat",
+    "category": "bands",
+    "name": "Flat",
+    "model": "bands-flat.glb",
+    "render": "bands-flat.png",
+    "project": "bands-flat.blend"
+  },
+  {
+    "id": "bands-knife-edge",
+    "category": "bands",
+    "name": "Knife edge",
+    "model": "bands-knife-edge.glb",
+    "render": "bands-knife-edge.png",
+    "project": "bands-knife-edge.blend"
+  },
+  {
+    "id": "bands-soft-square",
+    "category": "bands",
+    "name": "Soft square",
+    "model": "bands-soft-square.glb",
+    "render": "bands-soft-square.png",
+    "project": "bands-soft-square.blend"
+  },
+  {
+    "id": "bands-tapered",
+    "category": "bands",
+    "name": "Tapered",
+    "model": "bands-tapered.glb",
+    "render": "bands-tapered.png",
+    "project": "bands-tapered.blend"
+  },
+  {
+    "id": "bands-reverse-tapered",
+    "category": "bands",
+    "name": "Reverse tapered",
+    "model": "bands-reverse-tapered.glb",
+    "render": "bands-reverse-tapered.png",
+    "project": "bands-reverse-tapered.blend"
+  },
+  {
+    "id": "bands-split-shank",
+    "category": "bands",
+    "name": "Split shank",
+    "model": "bands-split-shank.glb",
+    "render": "bands-split-shank.png",
+    "project": "bands-split-shank.blend"
+  },
+  {
+    "id": "bands-twisted",
+    "category": "bands",
+    "name": "Twisted",
+    "model": "bands-twisted.glb",
+    "render": "bands-twisted.png",
+    "project": "bands-twisted.blend"
+  },
+  {
+    "id": "bands-rope",
+    "category": "bands",
+    "name": "Rope",
+    "model": "bands-rope.glb",
+    "render": "bands-rope.png",
+    "project": "bands-rope.blend"
+  },
+  {
+    "id": "bands-bypass",
+    "category": "bands",
+    "name": "Bypass",
+    "model": "bands-bypass.glb",
+    "render": "bands-bypass.png",
+    "project": "bands-bypass.blend"
+  },
+  {
+    "id": "bands-open",
+    "category": "bands",
+    "name": "Open",
+    "model": "bands-open.glb",
+    "render": "bands-open.png",
+    "project": "bands-open.blend"
+  },
+  {
+    "id": "bands-wide",
+    "category": "bands",
+    "name": "Wide",
+    "model": "bands-wide.glb",
+    "render": "bands-wide.png",
+    "project": "bands-wide.blend"
+  },
+  {
+    "id": "bands-sculpted-organic",
+    "category": "bands",
+    "name": "Sculpted organic",
+    "model": "bands-sculpted-organic.glb",
+    "render": "bands-sculpted-organic.png",
+    "project": "bands-sculpted-organic.blend"
+  },
+  {
+    "id": "bands-vintage",
+    "category": "bands",
+    "name": "Vintage",
+    "model": "bands-vintage.glb",
+    "render": "bands-vintage.png",
+    "project": "bands-vintage.blend"
+  }
+]
