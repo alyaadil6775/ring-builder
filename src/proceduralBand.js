@@ -34,17 +34,21 @@ export function mergeMetal(group,material){
  const mesh=new THREE.Mesh(geometry,material);mesh.name='Connected '+group.name+' metal';group.add(mesh);
 }
 export function createBand({config:c,plan,footprint}){
- const group=new THREE.Group(),material=new THREE.MeshStandardMaterial({name:'Metal'}),gap=bandGap(c),N=192,M=16,r=ringDimensions(c).centerRadiusMm;
+ const group=new THREE.Group(),material=new THREE.MeshStandardMaterial({name:'Metal'}),gap=bandGap(c),N=256,M=32,r=ringDimensions(c).centerRadiusMm;
  group.name=c.band+' fitted band';const contacts=[];
  const definitions=c.band==='Split shank'?[{start:1.12,span:Math.PI*2-2.24,body:true},{start:-1.3,span:2.6,rail:0},{start:-1.3,span:2.6,rail:1}]:bandRails(c,Math.PI).map((_,rail)=>({start:gap,span:Math.PI*2-gap*2,rail}));
  for(const definition of definitions){
-  const vertices=[],indices=[];
-  for(let i=0;i<=N;i++){
+  const vertices=[],indices=[],closed=Math.abs(definition.span-Math.PI*2)<1e-8,rings=closed?N:N+1;
+  for(let i=0;i<rings;i++){
    const a=definition.start+definition.span*i/N,p=definition.body?{center:new THREE.Vector3(r*Math.sin(a),r*Math.cos(a),0),radialHalf:c.thicknessMm/2,axialHalf:c.widthMm/2}:bandRails(c,a)[definition.rail],normal=new THREE.Vector3(Math.sin(a),Math.cos(a),0);
    for(let j=0;j<M;j++){const b=j*Math.PI*2/M;vertices.push(...p.center.clone().addScaledVector(normal,p.radialHalf*Math.cos(b)).add(new THREE.Vector3(0,0,p.axialHalf*Math.sin(b))).toArray());}
   }
-  for(let i=0;i<N;i++)for(let j=0;j<M;j++){const a=i*M+j,b=i*M+(j+1)%M;indices.push(a,b,a+M,b,b+M,a+M);}
-  for(const [base,reverse] of [[0,true],[N*M,false]])for(let j=1;j<M-1;j++)indices.push(base,base+(reverse?j+1:j),base+(reverse?j:j+1));
+  for(let i=0;i<N;i++)for(let j=0;j<M;j++){const a=i*M+j,b=i*M+(j+1)%M;const next=((i+1)%rings)*M;indices.push(a,b,next+j,b,next+(j+1)%M,next+j);}
+  if(!closed)for(const [base,reverse] of [[0,true],[N*M,false]]){
+   // Separate cap vertices keep flat end normals out of the curved surface.
+   const cap=vertices.length/3;vertices.push(...vertices.slice(base*3,(base+M)*3));
+   for(let j=1;j<M-1;j++)indices.push(cap,cap+(reverse?j+1:j),cap+(reverse?j:j+1));
+  }
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();group.add(new THREE.Mesh(geometry,material));
  }
  function linkFromRails(angle,target,label){
@@ -60,6 +64,6 @@ export function createBand({config:c,plan,footprint}){
   else linkFromRails(0,target,'Center gallery');
  }
  // Satellite stems use the common radius; bridge every actual rail into that root.
- if(['Three-stone','Five-stone','Graduated'].includes(c.layout))for(const sign of [-1,1])for(const angle of footprint.sideAngles){const a=sign*angle;linkFromRails(a,new THREE.Vector3(r*Math.sin(a),r*Math.cos(a),0),'Side basket');}
+ if(['Three-stone','Five-stone','Graduated'].includes(c.layout))for(const sign of [-1,1])for(const angle of (footprint.sideAnglesBySign?.[sign]??footprint.sideAngles)){const a=sign*angle;linkFromRails(a,new THREE.Vector3(r*Math.sin(a),r*Math.cos(a),0),'Side basket');}
  mergeMetal(group,material);group.userData.contacts=contacts;return group;
 }
