@@ -1,13 +1,15 @@
 import * as THREE from 'three';
+import {gemTypes,gemColors} from './gemstones.js';
 
-export function createGemMaterial(mesh){
+export function createGemMaterial(mesh,choice={type:'Diamond',color:'Colorless'}){
+ const preset=gemTypes[choice.type],tint=gemColors[choice.color],colored=choice.color!=='Colorless',opaque=choice.color==='Black';
  mesh.geometry.computeBoundingBox();
  const size=mesh.geometry.boundingBox.getSize(new THREE.Vector3()).multiply(mesh.scale);
  return new THREE.MeshPhysicalMaterial({
-  name:'Gem',color:'#ffffff',metalness:0,roughness:.003,
-  transmission:.88,ior:2.42,dispersion:1.6,
+  name:'Gem',color:tint,metalness:0,roughness:opaque?.10:.003,
+  transmission:opaque?0:.88,ior:preset.ior,dispersion:preset.dispersion,
   thickness:Math.max(.15,Math.min(size.x,size.y,size.z)),
-  attenuationColor:'#ffffff',attenuationDistance:Infinity,
+  attenuationColor:tint,attenuationDistance:colored?Math.max(.4,Math.min(size.x,size.y,size.z)*1.5):Infinity,
   envMapIntensity:2.8,flatShading:true,
   specularIntensity:1,clearcoat:1,clearcoatRoughness:.003,
  });

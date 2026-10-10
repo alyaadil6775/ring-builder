@@ -1,3 +1,4 @@
+import {isDefaultGem} from './gemstones.js';
 import {centerStonePrice,priceAccentStones,accentPriceSource} from './stonePricing.js';
 import {alloyDensity,isPlated} from './alloys.js';
 import {pricingPolicy} from './pricingPolicy.js';
@@ -15,12 +16,14 @@ export function priceDesign(config,measurement=null){
  const platingVolumeMm3=isPlated(config.metal)&&measurement?.surfaceAreaMm2!=null?measurement.surfaceAreaMm2*p.platingMicrons/1000:0;
  const platingWeightGrams=platingVolumeMm3/1000*15.39;
  const lines=[];
- const accentStones=measurement?.accentStoneVolumesMm3?priceAccentStones(measurement.accentStoneVolumesMm3):null;
+ const unknownAccentPrice=(config.accents&&config.accents!=='None'&&!isDefaultGem(config,'accent'))||(config.layout&&config.layout!=='Solitaire'&&!isDefaultGem(config,'side'));
+ const volumes=measurement?.accentStoneVolumesMm3;
+ const accentStones=volumes?(unknownAccentPrice?{count:volumes.length,carats:null,amount:null}:priceAccentStones(volumes)):null;
  if(config.band){
   lines.push({label:'Metal',amount:weightGrams!=null&&valid(p.metalPerGram)?weightGrams*p.metalPerGram:null});
   lines.push({label:'Labor',amount:pricingPolicy.labor});
   lines.push({label:'Mold',amount:pricingPolicy.mold});
-  if(config.setting)lines.push({label:config.stone.source?'Center stone (database USD)':'Center stone (sample price)',amount:centerStonePrice(config)});
+  if(config.setting)lines.push({label:!isDefaultGem(config)?'Center gemstone (quote required)':config.stone.source?'Center stone (database USD)':'Center stone (sample price)',amount:centerStonePrice(config)});
   if(config.accents&&config.accents!=='None'||config.layout&&config.layout!=='Solitaire')lines.push({label:accentStones?`Accent / side stones (${accentStones.count})`:'Accent / side stones',amount:accentStones?.amount??null});
  }
  const complete=lines.length>0&&lines.every(l=>l.amount!==null),subtotal=lines.reduce((sum,l)=>sum+(l.amount??0),0);

@@ -5,6 +5,10 @@ export function stoneOutline(shape){
  if(['Emerald','Radiant','Asscher'].includes(shape)){
   const c=shape==='Emerald'?.7:.62;return [[-c,-1],[c,-1],[1,-c],[1,c],[c,1],[-c,1],[-1,c],[-1,-c]];
  }
+ if(shape==='Baguette')return [[-1,-1],[1,-1],[1,1],[-1,1]];
+ if(shape==='Tapered baguette'||shape==='Trapezoid')return [[-1,-1],[1,-1],[.55,1],[-.55,1]];
+ if(shape==='Trillion')return [[-1,-1],[1,-1],[0,1]];
+ if(shape==='Half-moon')return Array.from({length:33},(_,i)=>{const t=Math.PI*i/32;return [Math.cos(t),2*Math.sin(t)-1];});
  if(shape==='Princess')return [[-1,-1],[1,-1],[1,1],[-1,1]];
  const points=Array.from({length:64},(_,i)=>{
   const t=TAU*i/64;let x=Math.cos(t),y=Math.sin(t);
@@ -38,12 +42,13 @@ export function settingPlan(stone,setting='4 prong',thicknessMm=1.3,bandRadius=9
  const count=setting==='6 prong'?6:4,angles=Array.from({length:count},(_,i)=>TAU*(i+.5)/count);
  if(shape==='Princess'&&count===6)angles.splice(0,angles.length,...[1,2,3,5,6,7].map(n=>n*Math.PI/4));
  if(shape==='Pear')angles.push(Math.PI/2);
+ if(shape==='Trillion')angles.splice(0,angles.length,Math.PI/2,Math.PI*5/4,Math.PI*7/4);
  if(shape==='Marquise')angles.push(Math.PI/2,3*Math.PI/2);
  if(shape==='Heart')angles.push(3*Math.PI/2);
  const unique=angles.filter((a,i)=>angles.findIndex(b=>Math.abs(a-b)<1e-6)===i);
  const prongs=unique.map(a=>{
   const [x,y]=boundary(outline,a),gap=radius*.9;
-  return {point:[x,y],protective:setting!=='Bezel'&&((shape==='Princess'&&Math.abs(x)>.98&&Math.abs(y)>.98)||(['Pear','Marquise','Heart'].includes(shape)&&Math.abs(x)<.05)),controls:[[x*w*.58,y*l*.58,galleryHeight],[x*(w+gap),y*(l+gap),girdle-.45],[x*(w+gap*.7),y*(l+gap*.7),girdle+.15],[x*w*.97,y*l*.97,girdle+.24]]};
+  return {point:[x,y],protective:setting!=='Bezel'&&((shape==='Princess'&&Math.abs(x)>.98&&Math.abs(y)>.98)||(['Pear','Marquise','Heart','Trillion'].includes(shape)&&Math.abs(x)<.05)),controls:[[x*w*.58,y*l*.58,galleryHeight],[x*(w+gap),y*(l+gap),girdle-.45],[x*(w+gap*.7),y*(l+gap*.7),girdle+.15],[x*w*.97,y*l*.97,girdle+.24]]};
  });
  const spokes=[0,Math.PI/2,Math.PI,3*Math.PI/2].map(a=>{
   const [x,y]=boundary(outline,a);return [[0,0,root],[x*w*.58,y*l*.58,galleryHeight]];

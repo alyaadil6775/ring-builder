@@ -2,8 +2,8 @@ import {stones,metals} from './catalog.js';
 import {defaultPricing} from './pricing.js';
 import {validateDesign} from './designRules.js';
 export const DRAFT_KEY='dukaan.ring-builder.draft.v1',SAVED_KEY='dukaan.ring-builder.saved.v1';
-export const initialConfig=()=>({band:null,widthMm:2.1,thicknessMm:1.3,metal:'Yellow gold',karat:14,ringSystem:'US',ringSize:7,orientationDeg:0,accents:null,layout:null,setting:null,stone:stones[0],showStone:false,stonePriceCurrency:null,pricing:{...defaultPricing},notes:''});
-const keys=['band','widthMm','thicknessMm','metal','karat','ringSystem','ringSize','orientationDeg','accents','layout','setting','showStone','stonePriceCurrency','notes'];
+export const initialConfig=()=>({band:null,widthMm:2.1,thicknessMm:1.3,metal:'Yellow gold',karat:14,ringSystem:'US',ringSize:7,orientationDeg:0,accents:null,layout:null,sideStoneShape:'Round',centerGemType:'Diamond',centerGemColor:'Colorless',sideGemType:'Diamond',sideGemColor:'Colorless',accentGemType:'Diamond',accentGemColor:'Colorless',setting:null,stone:stones[0],showStone:false,stonePriceCurrency:null,pricing:{...defaultPricing},notes:''});
+const keys=['band','widthMm','thicknessMm','metal','karat','ringSystem','ringSize','orientationDeg','accents','layout','sideStoneShape','centerGemType','centerGemColor','sideGemType','sideGemColor','accentGemType','accentGemColor','setting','showStone','stonePriceCurrency','notes'];
 export function serializeDesign(config){const data={};for(const key of keys)data[key]=config[key];return {version:1,config:{...data,stoneId:config.stone.id,pricing:{...defaultPricing,...config.pricing}}};}
 export function restoreDesign(payload){
  if(!payload||payload.version!==1||!payload.config||typeof payload.config!=='object')throw new Error('Unsupported design format.');

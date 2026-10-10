@@ -1,3 +1,4 @@
+import {isDefaultGem} from './gemstones.js';
 // Temporary round CVD lab-grown diamond benchmark, G+/VS+, checked 2026-10-08.
 export const accentPriceSource='https://trilliantdiamondsllc.com/pages/melee-lab-diamonds';
 // Upper estimated carat weight / USD per carat. Model carats are approximate.
@@ -8,7 +9,7 @@ export function priceAccentStones(volumes){
  return {count:stones.length,carats:stones.reduce((s,x)=>s+x.carats,0),amount:stones.reduce((s,x)=>s+x.amount,0)};
 }
 export function centerStonePrice(config){
- if(!config.setting)return null;
+ if(!config.setting||!isDefaultGem(config))return null;
  const s=config.stone,value=s.source?s.sourcePrice:s.price;
  return Number.isFinite(value)&&value>=0?value:null;
 }
