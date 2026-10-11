@@ -15,11 +15,14 @@ export function createGemMaterial(mesh,choice={type:'Diamond',color:'Colorless'}
  });
 }
 
-// High-dynamic-range studio panels provide bright and dark shapes for each
+// A bright studio surround and reflection panels provide readable shapes for each
 // facet to reflect. The visible background stays independent of this map.
 export function createJewelryEnvironment(renderer){
  const width=1024,height=512,data=new Float32Array(width*height*4);
  const panels=[
+  // Broad fill panels keep the inner shank and underside from reflecting black.
+  [.10,.70,.22,.24,1.2,[1,.98,.94]],
+  [.60,.78,.25,.20,1.0,[.96,.98,1]],
   [.16,.25,.055,.20,7,[1,.97,.91]],
   [.48,.24,.10,.055,9,[1,1,1]],
   [.72,.43,.028,.25,6,[.90,.96,1]],
@@ -36,7 +39,7 @@ export function createJewelryEnvironment(renderer){
  ];
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
   const u=x/width,v=y/height,index=(y*width+x)*4;
-  let color=[.10,.10,.10];
+  let color=[.65,.65,.65];
   for(const [cx,cy,rx,ry,power,tint] of panels){
    const dx=Math.min(Math.abs(u-cx),1-Math.abs(u-cx))/rx,dy=Math.abs(v-cy)/ry;
    const intensity=power*Math.exp(-Math.pow(dx,8)-Math.pow(dy,8));

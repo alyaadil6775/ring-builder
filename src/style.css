@@ -4,3 +4,72 @@
 
 input:not([type=range]):not([type=checkbox]):not([type=file]),textarea{display:block;width:100%;padding:11px;border:1px solid #d7d2c7;border-radius:6px;margin-top:8px;background:#faf8f4;font:inherit;color:inherit}button{min-height:44px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #9d7731;outline-offset:3px}.workspace>div{min-width:0}.view-controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.view-controls button,.saved-designs button,.preview-status button{border:1px solid #d7d2c7;background:white;padding:10px 14px;border-radius:8px;cursor:pointer;color:inherit}.design-tools{margin-top:24px;padding:24px;border:1px solid #e6e1d7;border-radius:12px;background:white}.design-tools h2{margin-bottom:8px}.saved-designs{list-style:none;padding:0}.saved-designs li{display:flex;justify-content:space-between;gap:10px;margin:10px 0}.saved-designs button:first-child{text-align:left;flex:1;overflow-wrap:anywhere}.stone-details{font-size:13px;padding:14px;background:#faf8f4;border-radius:8px}.stone-details dl{display:grid;grid-template-columns:1fr 1.3fr;gap:8px}.stone-details dt{color:#747267}.stone-details dd{margin:0;overflow-wrap:anywhere}.pricing-policy{border-top:1px solid #ddd;margin-top:20px;padding-top:16px}.pricing-policy summary{cursor:pointer;min-height:44px;line-height:44px}.preview-shell{position:relative}.preview-status{position:absolute;bottom:12px;left:16px;right:16px;padding:12px;background:#ffffffed;border-radius:8px;font-size:13px}.preview-status p{margin:0 0 8px}.price div{gap:12px}.price div span:last-child{text-align:right}.price .total{flex-wrap:wrap}@media(max-width:480px){main{padding:16px}h1{font-size:34px}.workspace{margin-top:20px}.viewer{height:340px}aside,.design-tools{padding:18px}.builder-steps{gap:6px}.builder-steps button{font-size:12px;padding:10px}.view-controls button{flex:1;font-size:12px}.choices button{min-height:48px}}
 aside fieldset{min-width:0;margin:20px 0;padding:14px;border:1px solid #e6e1d7;border-radius:8px}aside legend{padding:0 6px;font-size:13px;font-weight:bold}aside fieldset label{margin:12px 0}
+
+/* Keep the preview beside desktop controls and above mobile selections. */
+.builder-workspace{align-items:start;grid-template-columns:minmax(0,1fr) minmax(300px,360px)}
+.preview-dock{position:sticky;top:16px;z-index:10;min-width:0;background:#faf8f4;border-radius:16px;padding-bottom:4px}
+.builder-workspace .viewer{height:clamp(240px,65vh,560px);height:clamp(240px,65svh,560px)}
+.preview-dock .view-controls{margin:10px 0 6px}
+.preview-dock .hint{margin:6px 0;font-size:12px}
+.design-details{grid-column:1/-1;min-width:0}
+.builder-workspace aside{min-width:0}
+.ring-builder button,.ring-builder select,.ring-builder label{overflow-wrap:anywhere}
+@media(max-width:800px){
+ .ring-builder{padding:20px 16px}
+ .builder-workspace{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:20px}
+ .preview-dock{top:env(safe-area-inset-top,0px);padding:8px 0 4px;border-radius:0;box-shadow:0 8px 12px -12px #29282080}
+ .builder-workspace .viewer{height:clamp(100px,32vh,300px);height:clamp(100px,32svh,300px);border-radius:12px}
+ .preview-dock .view-controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+ .preview-dock .view-controls button{padding:8px 4px;font-size:12px;min-height:44px}
+ .ring-builder .builder-steps{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px}
+ .ring-builder .builder-steps button{flex-shrink:0}
+ .ring-builder select,.ring-builder input:not([type=range]):not([type=checkbox]),.ring-builder textarea{font-size:16px}
+ .builder-workspace aside,.design-details .design-tools{padding:18px}
+ .design-details .design-tools{margin-top:16px}
+ .ring-builder .choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html{scroll-padding-top:calc(32vh + 100px);scroll-padding-top:calc(32svh + 100px)}
+}
+@media(max-width:380px){
+ .ring-builder{padding:16px 10px}
+ .preview-dock .view-controls button{font-size:11px}
+}
+
+/* Separate viewport regions prevent controls from passing underneath the ring. */
+.ring-builder{height:100vh;height:100dvh;max-width:1600px;padding:20px;display:flex;flex-direction:column;overflow:hidden;gap:12px}
+.ring-builder>header{display:flex;align-items:center;flex-wrap:wrap;gap:12px;flex:none}
+.ring-builder>header span{font-size:10px;letter-spacing:2px}
+.ring-builder>header h1{font-size:28px;margin:0 auto 0 0}
+.ring-builder>header a{font-size:12px}
+.export-open,.dialog-header button{min-height:44px;border:1px solid #d7d2c7;background:white;color:inherit;border-radius:8px;padding:10px 14px;cursor:pointer}
+.ring-builder>.builder-steps{margin:0;flex:none}
+.ring-builder>.fit-note{margin:0;padding:8px 12px;max-height:12vh;overflow:auto;flex:none}
+.ring-builder>.builder-workspace{flex:1;min-height:0;margin:0;gap:20px;align-items:stretch}
+.builder-workspace>.preview-dock{position:relative;top:auto;z-index:auto;padding:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:none}
+.builder-workspace .preview-shell{flex:1;min-height:0}
+.builder-workspace .viewer{height:100%;min-height:0}
+.preview-dock .view-controls{flex:none;justify-content:center;margin:8px 0 0}
+.builder-workspace>aside{height:100%;min-height:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-gutter:stable}
+.export-dialog{width:min(620px,calc(100% - 24px));max-height:85vh;max-height:85dvh;overflow:auto;padding:24px;border:1px solid #e6e1d7;border-radius:16px;background:#faf8f4;color:#292820}
+.export-dialog::backdrop{background:#29282080}
+.dialog-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.dialog-header h2{margin:0}
+.export-dialog .design-tools{padding:0;border:0;background:transparent;margin:16px 0 0}
+.ring-builder details summary{cursor:pointer;padding:8px 0;font-size:13px}
+@media(max-width:800px){
+ .ring-builder{padding:12px;gap:8px}
+ .ring-builder>header span{display:none}
+ .ring-builder>header h1{font-size:21px}
+ .ring-builder>header a{display:none}
+ .ring-builder>header .export-open{padding:8px 10px;font-size:12px}
+ .ring-builder>.builder-steps{padding-bottom:4px}
+ .ring-builder>.builder-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(100px,38%) minmax(0,1fr);gap:10px}
+ .preview-dock .view-controls{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:6px}
+ .builder-workspace>aside{padding:16px}
+ .builder-workspace .viewer{border-radius:12px}
+ .export-dialog{padding:18px}
+ html{scroll-padding-top:0}
+}
+@media(max-height:500px) and (orientation:landscape){
+ .ring-builder>header h1{font-size:18px}
+ .ring-builder>.builder-workspace{grid-template-columns:minmax(0,1fr) minmax(250px,40%);grid-template-rows:minmax(0,1fr)}
+}

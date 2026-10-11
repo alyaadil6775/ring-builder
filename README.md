@@ -129,3 +129,13 @@ These are visualization clearances, not manufacturing tolerances.
 Run node --test tests/settingSpacing.test.mjs for the complete placement matrix.
 Inspection: node tests/exportSettingSpacing.mjs, then run Blender with
 blender/scripts/render_setting_spacing.py.
+
+## Mobile builder
+
+The preview stays sticky above selections on phones/tablets and beside controls
+on desktop. Its height adapts to the viewport so controls remain accessible.
+Step navigation scrolls horizontally on small screens; touch controls and form
+text remain usable without browser input zoom. Saved-design tools follow the
+selection controls. Trackball bounds refresh at gesture start so scrolling
+does not shift the rotation coordinates.
+The builder now has separate preview and selection regions within the viewport. Only selections scroll, so they never pass beneath the preview. Save, share, image download, design JSON, and specification export are grouped in the Save / export dialog. Price breakdown and stone metadata are collapsed by default.
