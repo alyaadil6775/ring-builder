@@ -1,3 +1,4 @@
+import {settingStyles,referenceModel} from './referenceOptions.js';
 import {sidePlacements} from './settingSpacing.js';
 import {sideStoneShapes,layoutSideStone,sideStoneSpan} from './layoutStones.js';
 import {gemValidation} from './gemstones.js';
@@ -5,7 +6,7 @@ import {ringDimensions} from './sizing.js';
 import {bandStyles,accentStyles,layoutStyles,accentCompatibleBands,settingCompatibleBands,supportedAccents} from './options.js';
 import {stoneOutline} from './proceduralSetting.js';
 import {offsetContour} from './proceduralLayout.js';
-export const supportedShapes=['Round','Oval','Emerald','Princess','Cushion','Pear','Marquise','Radiant','Asscher','Heart'];
+export const supportedShapes=['Round','Oval','Emerald','Princess','Cushion','Pear','Marquise','Radiant','Asscher','Heart','Trillion','Baguette','Hexagon','Lozenge','Octagon'];
 export function layoutFootprint(config){
  const {centerRadiusMm:r}=ringDimensions(config),stone=config.stone;
  const rotated=Number(config.orientationDeg)===90,width=rotated?stone.lengthMm:stone.widthMm;
@@ -34,7 +35,7 @@ export function validateDesign(c){
  if(c.accents&&!accentStyles.includes(c.accents))errors.push('Unknown accent style.');
  if(c.sideStoneShape!=null&&!sideStoneShapes.includes(c.sideStoneShape))errors.push('Unknown side stone shape.');
  if(c.layout&&!layoutStyles.includes(c.layout))errors.push('Unknown layout.');
- if(c.setting&&!['4 prong','6 prong','Bezel'].includes(c.setting))errors.push('Unknown center holder.');
+ if(c.setting&&!settingStyles.includes(c.setting))errors.push('Unknown center holder.');
  if(![0,90].includes(Number(c.orientationDeg??0)))errors.push('Choose north/south or east/west orientation.');
  if(!Number.isFinite(c.widthMm)||c.widthMm<1.5||c.widthMm>5)errors.push('Band width must be 1.5–5 mm.');
  if(!Number.isFinite(c.thicknessMm)||c.thicknessMm<1||c.thicknessMm>2)errors.push('Band thickness must be 1–2 mm.');

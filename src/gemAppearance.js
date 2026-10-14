@@ -6,12 +6,12 @@ export function createGemMaterial(mesh,choice={type:'Diamond',color:'Colorless'}
  mesh.geometry.computeBoundingBox();
  const size=mesh.geometry.boundingBox.getSize(new THREE.Vector3()).multiply(mesh.scale);
  return new THREE.MeshPhysicalMaterial({
-  name:'Gem',color:tint,metalness:0,roughness:opaque?.10:.003,
-  transmission:opaque?0:.88,ior:preset.ior,dispersion:preset.dispersion,
+  name:'Gem',color:tint,metalness:0,roughness:opaque?.10:.005,side:THREE.DoubleSide,
+  transmission:opaque?0:colored?.88:.92,ior:preset.ior,dispersion:preset.dispersion,
   thickness:Math.max(.15,Math.min(size.x,size.y,size.z)),
   attenuationColor:tint,attenuationDistance:colored?Math.max(.4,Math.min(size.x,size.y,size.z)*1.5):Infinity,
-  envMapIntensity:2.8,flatShading:true,
-  specularIntensity:1,clearcoat:1,clearcoatRoughness:.003,
+  envMapIntensity:1.15,flatShading:true,
+  specularIntensity:1,clearcoat:.15,clearcoatRoughness:.01,
  });
 }
 
@@ -39,7 +39,7 @@ export function createJewelryEnvironment(renderer){
  ];
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
   const u=x/width,v=y/height,index=(y*width+x)*4;
-  let color=[.65,.65,.65];
+  let color=[.18,.19,.22];
   for(const [cx,cy,rx,ry,power,tint] of panels){
    const dx=Math.min(Math.abs(u-cx),1-Math.abs(u-cx))/rx,dy=Math.abs(v-cy)/ry;
    const intensity=power*Math.exp(-Math.pow(dx,8)-Math.pow(dy,8));

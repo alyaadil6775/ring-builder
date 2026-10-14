@@ -19,7 +19,7 @@ test('all gemstone and color combinations render with finite, type-specific mate
   const material=createGemMaterial(mesh,{type,color});
   assert.equal(material.ior,preset.ior);assert.equal(material.color.getHexString(),new THREE.Color(gemColors[color]).getHexString());
   assert.ok(Number.isFinite(material.thickness)&&material.thickness>0);
-  assert.equal(material.transmission,color==='Black'?0:.88);material.dispose();
+  assert.equal(material.transmission,color==='Black'?0:color==='Colorless'?.92:.88);material.dispose();
  }
  mesh.geometry.dispose();mesh.material.dispose();
 });

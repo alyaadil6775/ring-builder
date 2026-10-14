@@ -5,6 +5,9 @@ export function stoneOutline(shape){
  if(['Emerald','Radiant','Asscher'].includes(shape)){
   const c=shape==='Emerald'?.7:.62;return [[-c,-1],[c,-1],[1,-c],[1,c],[c,1],[-c,1],[-1,c],[-1,-c]];
  }
+ if(shape==='Hexagon')return [[-1,-.65],[0,-1],[1,-.65],[1,.65],[0,1],[-1,.65]];
+ if(shape==='Lozenge')return [[0,-1],[1,0],[0,1],[-1,0]];
+ if(shape==='Octagon')return [[-.6,-1],[.6,-1],[1,-.6],[1,.6],[.6,1],[-.6,1],[-1,.6],[-1,-.6]];
  if(shape==='Baguette')return [[-1,-1],[1,-1],[1,1],[-1,1]];
  if(shape==='Tapered baguette'||shape==='Trapezoid')return [[-1,-1],[1,-1],[.55,1],[-.55,1]];
  if(shape==='Trillion')return [[-1,-1],[1,-1],[0,1]];

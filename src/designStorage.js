@@ -1,3 +1,4 @@
+import {databaseStoneById} from './databaseStones.js';
 import {stones,metals} from './catalog.js';
 import {defaultPricing} from './pricing.js';
 import {validateDesign} from './designRules.js';
@@ -7,7 +8,7 @@ const keys=['band','widthMm','thicknessMm','metal','karat','ringSystem','ringSiz
 export function serializeDesign(config){const data={};for(const key of keys)data[key]=config[key];return {version:1,config:{...data,stoneId:config.stone.id,pricing:{...defaultPricing,...config.pricing}}};}
 export function restoreDesign(payload){
  if(!payload||payload.version!==1||!payload.config||typeof payload.config!=='object')throw new Error('Unsupported design format.');
- const raw=payload.config,stone=stones.find(s=>s.id===raw.stoneId);if(!stone)throw new Error('The selected stone is not in this catalog.');
+ const raw=payload.config,stone=databaseStoneById.get(raw.stoneId)??stones.find(s=>s.id===raw.stoneId);if(!stone)throw new Error('The selected stone is not in this catalog.');
  const c=initialConfig();for(const key of keys)if(Object.hasOwn(raw,key))c[key]=raw[key];c.stone=stone;
  if(!Object.hasOwn(metals,c.metal)||![10,14,18].includes(c.karat)||!['US','Circumference'].includes(c.ringSystem)||typeof c.showStone!=='boolean'||typeof c.notes!=='string'||c.notes.length>5000||!['USD','EUR','GBP',null].includes(c.stonePriceCurrency))throw new Error('Invalid design selections.');
  const policy={...defaultPricing};for(const key of Object.keys(policy))if(raw.pricing&&Object.hasOwn(raw.pricing,key))policy[key]=raw.pricing[key];

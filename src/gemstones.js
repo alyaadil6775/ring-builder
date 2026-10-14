@@ -18,6 +18,7 @@ export const gemTypes={
  Peridot:{ior:1.67,dispersion:.3,colors:['Green']},
  Spinel:{ior:1.72,dispersion:.3,colors:['Red','Pink','Purple','Blue','Black']},
 };
+for(const [type,ior] of Object.entries({"Tourmaline":1.64,"Zircon":1.93,"Tanzanite":1.7,"Morganite":1.58,"Tsavorite Garnet":1.74,"Spessartite Garnet":1.8,"Citrine":1.55,"Opal":1.45,"Alexandrite":1.75,"Apatite":1.64,"Rhodolite Garnet":1.76,"Demantoid Garnet":1.89,"Zoisite":1.7,"Zultanite Diaspore":1.72,"Beryl":1.58,"Kunzite":1.66,"Sunstone":1.54,"Ametrine":1.55,"Chrysoberyl":1.75}))gemTypes[type]={ior,dispersion:.3,colors:Object.keys(gemColors)};
 export function gemChoice(config,scope='center'){
  return {type:config[scope+'GemType']??'Diamond',color:config[scope+'GemColor']??'Colorless'};
 }

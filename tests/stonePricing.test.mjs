@@ -8,6 +8,23 @@ import {measureMetal} from '../src/metalVolume.js';
 import {priceAccentStones} from '../src/stonePricing.js';
 import {priceDesign} from '../src/pricing.js';
 import {stones} from '../src/catalog.js';
+test('shoulder and side quantities receive separate benchmark subtotals',()=>{
+ const c={...initialConfig(),band:'Rounded',accents:'Pave',layout:'Three-stone',setting:'4 prong'};
+ const shoulders=[.005/.0176,.005/.0176],sides=[.07/.0176,.07/.0176];
+ const q=priceDesign(c,{volumeMm3:200,shoulderStoneVolumesMm3:shoulders,sideStoneVolumesMm3:sides,accentStoneVolumesMm3:[...shoulders,...sides]});
+ assert.equal(q.shoulderStones.count,2);assert.equal(q.sideStones.count,2);
+ assert.ok(Math.abs(q.shoulderStones.amount-2.25)<1e-8);
+ assert.ok(Math.abs(q.sideStones.amount-23.1)<1e-8);
+ const lines=q.lines.filter(l=>l.estimated);assert.equal(lines.length,2);
+ assert.ok(lines.every(l=>l.source&&l.label.includes('estimated')));
+ assert.ok(Math.abs(lines.reduce((sum,l)=>sum+l.amount,0)-q.accentStones.amount)<1e-8);
+});
+test('colored side stones require a quote while diamond accents retain their estimate',()=>{
+ const c={...initialConfig(),band:'Rounded',accents:'Pave',layout:'Three-stone',setting:'4 prong',sideGemType:'Sapphire',sideGemColor:'Blue'};
+ const q=priceDesign(c,{volumeMm3:200,shoulderStoneVolumesMm3:[.005/.0176],sideStoneVolumesMm3:[2,2]});
+ assert.ok(q.shoulderStones.amount>0);assert.equal(q.sideStones.amount,null);assert.equal(q.total,null);
+ assert.equal(q.sideStones.count,2);
+});
 test('procedural accent count matches the actual placed seats',()=>{
  const c={...initialConfig(),band:'Split shank',accents:'Pave',layout:'Solitaire',setting:'4 prong'};
  const part=assemblyParts(c).find(p=>p.id==='accents'),group=createBandAccents(part);

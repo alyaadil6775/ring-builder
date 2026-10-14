@@ -1,4 +1,5 @@
 import {layoutSideStone,sideStoneRotation} from './layoutStones.js';
+import {brilliantGeometry} from './gemCut.js';
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {settingPlan,createSetting,stoneOutline} from './proceduralSetting.js';
@@ -16,6 +17,7 @@ export function offsetContour(outline,width,length,offset){
  });
 }
 export function createStone(stone,girdle){
+ if(['Round','Oval'].includes(stone.shape))return new THREE.Mesh(brilliantGeometry(stone.widthMm,stone.lengthMm,stone.depthMm,girdle),new THREE.MeshPhysicalMaterial({name:'Gem',color:'#ffffff',transmission:.92,ior:2.42,roughness:.005,side:THREE.DoubleSide}));
  let outline=stoneOutline(stone.shape);if(THREE.ShapeUtils.area(outline.map(p=>new THREE.Vector2(...p)))<0)outline=[...outline].reverse();
  const n=outline.length,w=stone.widthMm/2,l=stone.lengthMm/2,d=stone.depthMm,vertices=[],indices=[];
  const rings=[[.04,girdle-d*.78],[.52,girdle-d*.46],[.98,girdle-.08],[1,girdle],[.58,girdle+d*.22]];

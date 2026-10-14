@@ -1,3 +1,4 @@
+import {referenceModel} from './referenceOptions.js';
 import {settingPlan} from './proceduralSetting.js';
 import {ringDimensions} from './sizing.js';
 import {layoutFootprint,validateDesign} from './designRules.js';
@@ -11,6 +12,7 @@ export function accentZone(config){
 export function assemblyParts(config){
  const parts=[];if(!config.band)return parts;
  const errors=validateDesign(config);if(errors.length)return parts;
+ const reference=referenceModel(config);if(reference)return [{id:'reference',path:'variations/'+reference.id}];
  const dimensions=ringDimensions(config),radius=dimensions.centerRadiusMm;
  const zone=accentZone(config),suffix=zone==='standard'?'':'-'+zone;
  const fitted=config.accents&&config.accents!=='None'&&accentCompatibleBands.includes(config.band);
@@ -24,6 +26,6 @@ export function assemblyParts(config){
  if(config.band==='Rounded'&&!fitted){const band=parts[0];band.procedural='plainBand';band.config=config;delete band.radiusDelta;delete band.thickness;delete band.widthScale;}
  }
  if(config.layout&&config.layout!=='Solitaire')parts.push({id:'layout',procedural:'layout',config,plan,footprint:layoutFootprint(config)});
- if(config.setting){parts.push({id:'setting',procedural:'setting',plan,rotationY:Number(config.orientationDeg??0)*Math.PI/180});if(config.showStone)parts.push({id:'stone',path:`${config.stone.id}-stone`,heightOffset:plan.girdle-12.8,rotationY:Number(config.orientationDeg??0)*Math.PI/180});}
+ if(config.setting){parts.push({id:'setting',procedural:'setting',plan,rotationY:Number(config.orientationDeg??0)*Math.PI/180});if(config.showStone)parts.push({id:'stone',...(config.stone.databaseStone?{procedural:'stone',stone:config.stone,girdle:plan.girdle}:{path:`${config.stone.id}-stone`}),heightOffset:config.stone.databaseStone?0:plan.girdle-12.8,rotationY:Number(config.orientationDeg??0)*Math.PI/180});}
  return parts;
 }
